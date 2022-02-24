@@ -120,7 +120,7 @@ console.log(didI)
 
 // // food:{id:number,name:string, price:number}}
 
-// /// returns new array with the food item updated with the id given
+// //////////////////////////// returns new array with the food item updated with the id given
 
 // const updateFood1=(foods, id, food)=>{
 
@@ -138,12 +138,16 @@ console.log(didI)
 
 // // removes the food with the given the id
 
-const deleteFood1 = (foods,id)=>{
-
-
-
+const deleteFood1 = (foods,id) => {
+  let filterById = foods.filter((x) => {
+    if(x.id === id) {
+    return x.foods !== foods
+    }
+  })
+  return filterById
 
 }
+  console.log('delete food by ID', deleteFood1(mexican, 1))
 
 
 
@@ -160,3 +164,14 @@ const deleteFood1 = (foods,id)=>{
 
 
 // }
+// const eatFood = mexican.map((mexican) => ({
+//   food: mexican.name,
+//   price: mexican.price,
+// }));
+// console.log(eatFood)
+
+
+
+
+// const firstNames = mexican.map((mexican) => mexican.name.split('')[0]);
+// console.log (firstNames)
