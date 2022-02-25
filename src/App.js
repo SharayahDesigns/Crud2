@@ -6,7 +6,8 @@ import axios from 'axios';
 
 function App() {
   //the usestate needs to be at the top, these are hooks
-  const [users, setUsers] = useState([])
+  const [users,setUsers] = useState([])
+  // const [state, setStat]= useState(initialState)
   const [loading,setLoading] = useState(false)
   const [error, setError] = useState (null)
   
@@ -18,31 +19,26 @@ function App() {
     axios
       .get("https://reqres.in/api/users?delay=1")
       .then((res) => {
+        setUsers(res.data.data)
         setLoading(false)
       })
       .catch((err) => {
-        setError('some error occurred!!!!')
+        setError('Sorry Fuker')
         setLoading(false)
       });
   };
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+  //      //   if loading THEN show loading Or get users
+  //             {loading   ?    'loading'   : 'get users'}
   return (
-    <div className="App" style={{border: '5px solid black',margin: '10px'}}>
-      <h1>User SignIn</h1>
-      <button disabled={loading} onClick={getUsers}> {loading ? 'loading' : 'get users'}</button>
+    <div className="App">
+      <h1>User Sign In</h1>
+      
+      <button disabled={loading} onClick={getUsers}>{loading ? 'loading' : 'get users'}</button>
      
       <div>{JSON.stringify(users)}</div>
-        
-      
+      {error && <p style={{color:'red'}}>ERROR: {error}</p>}
     </div>
   );
 };
