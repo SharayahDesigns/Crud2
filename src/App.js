@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import {useState} from 'react';
 import axios from 'axios';
+import User from './User';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     axios
       .get("https://reqres.in/api/users?delay=1")
       .then((res) => {
+        console.log(res)
         setUsers(res.data.data)
         setLoading(false)
       })
@@ -28,16 +30,27 @@ function App() {
       });
   };
   
+  const deleteUser = (id) => {
+    console.log(id)
+    let newUsers = users.filter(u => u.id !== id)
+    setUsers(newUsers)
+    // remove from users
+  }
+  
 
   //      //   if loading THEN show loading Or get users
   //             {loading   ?    'loading'   : 'get users'}
   return (
     <div className="App">
-      <h1>User Sign In</h1>
+      <h1 className='title'>User Sign In</h1>
       
       <button disabled={loading} onClick={getUsers}>{loading ? 'loading' : 'get users'}</button>
-     
-      <div>{JSON.stringify(users)}</div>
+      {/* <div>{users.map((u) => <User email={u.email} first_name={u.first_name}/>)} </div> */}
+      
+      {/* this is the cleaner version */}
+                         {/* the KEY uses are to keep track behind the scenes  */}
+      <div>{users.map((u) => <User key={u.id} {...u} deleteUser={deleteUser}/>)} </div>
+      
       {error && <p style={{color:'red'}}>ERROR: {error}</p>}
     </div>
   );

@@ -12,7 +12,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.title {
+color: blue;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +37,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+.boxes {
+position: relative;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+padding: 20px 50px;
+margin: 100px 180px;
 }
