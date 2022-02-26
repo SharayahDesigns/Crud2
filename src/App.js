@@ -44,7 +44,7 @@ function App() {
     <div className="App">
       <h1 className='title'>User Sign In</h1>
       
-      <button disabled={loading} onClick={getUsers}>{loading ? 'loading' : 'get users'}</button>
+      <button className='getusers' disabled={loading} onClick={getUsers}>{loading ? 'loading' : 'Get Users'}</button>
       {/* <div>{users.map((u) => <User email={u.email} first_name={u.first_name}/>)} </div> */}
       
       {/* this is the cleaner version */}
