@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import {useState} from 'react';
 import axios from 'axios';
@@ -37,16 +37,25 @@ function App() {
   }
   
   const deleteUser = (id) => {
-    console.log(id)
-    
+    console.log(id) 
     let newUsers = users.filter(u => u.id !== id)
     setUsers(newUsers)
     // remove from users
+    
+  }
+  const updateUser = (user) => {
+    let updatedUsers = users.map(u => {
+      if(u.id === user.id) {
+        return user
+      }
+      return u
+    })
+    setUsers(updatedUsers)
   }
   
   const renderUsers = ()=>{
     return users.map((user) => {
-      return <User key={user.id}{...user} deleteUser={() => deleteUser(user.id)} />
+        return <User key={user.id}{...user} updateUser={updateUser} deleteUser={()=> deleteUser(user.id)}  />
       
     })
   }
@@ -58,21 +67,18 @@ function App() {
   return (
     <div className="App">
       <h1 className='title'>User Sign In</h1>
-      
-       
-      {/* hr is a space  */}
-      <hr/>
-      
-    
-      <button className='getusers' disabled={loading} onClick={getUsers}>{loading ? 'loading' : 'Get Users'}</button>
-      <NewUser addUserCB={addUser}/>
      
+      <NewUser addUserCB={addUser}/>
+      <button className='getusers' disabled={loading} onClick={getUsers}>{loading ? 'loading' : 'Get Users'}</button>
+       <div>{renderUsers()}</div>
+      {/* hr is a space  */}
+      <hr />
       {/* <div>{users.map((u) => <User email={u.email} first_name={u.first_name}/>)} </div> */}
       
       {/* this is the cleaner version */}
                          {/* the KEY uses are to keep track behind the scenes  */}
-      <div>{users.map((u) => <User key={u.id} {...u} deleteUser={deleteUser}/>)} </div>
-      
+      {/* <div>{users.map((u) => <User key={u.id} {...u} deleteUser={deleteUser}/>)} </div> */}
+     
       {error && <p style={{color:'red'}}>ERROR: {error}</p>}
     </div>
   );

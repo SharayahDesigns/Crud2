@@ -3,9 +3,7 @@
 position: relative;
 margin: 80px 0px 0px
 }
-body {
-margin: 20px;
-}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -45,8 +43,7 @@ color: blue;
 .boxes {
 position: relative;
 box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-padding: 20px 0px;
-margin: 50px 180px;
+
 }
 button {
  margin: 10px;
