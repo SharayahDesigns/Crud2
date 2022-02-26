@@ -3,6 +3,7 @@ import './App.css';
 import {useState} from 'react';
 import axios from 'axios';
 import User from './User';
+import NewUser from './NewUserForm';
 
 
 function App() {
@@ -30,21 +31,42 @@ function App() {
       });
   };
   
+  const addUser = (user) => {
+    let newUsers = [user, ...users]
+    setUsers(newUsers)
+  }
+  
   const deleteUser = (id) => {
     console.log(id)
+    
     let newUsers = users.filter(u => u.id !== id)
     setUsers(newUsers)
     // remove from users
   }
   
+  const renderUsers = ()=>{
+    return users.map((user) => {
+      return <User key={user.id}{...user} deleteUser={() => deleteUser(user.id)} />
+      
+    })
+  }
+  
 
-  //      //   if loading THEN show loading Or get users
+  //             if loading THEN show loading Or get users
   //             {loading   ?    'loading'   : 'get users'}
+  
   return (
     <div className="App">
       <h1 className='title'>User Sign In</h1>
       
+       
+      {/* hr is a space  */}
+      <hr/>
+      
+    
       <button className='getusers' disabled={loading} onClick={getUsers}>{loading ? 'loading' : 'Get Users'}</button>
+      <NewUser addUserCB={addUser}/>
+     
       {/* <div>{users.map((u) => <User email={u.email} first_name={u.first_name}/>)} </div> */}
       
       {/* this is the cleaner version */}
